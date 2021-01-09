@@ -4,19 +4,9 @@ import numpy as np
 import tkinter as tk
 from tkinter import filedialog
 
+
 HOGCV = cv2.HOGDescriptor()
 HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-
-# cv2.startWindowThread()
-
-
-# cap = cv2.VideoCapture(0)
-
-# while True:
-#     ret, frame = cap.read()
-#     cv2.imshow("Frame", frame)
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         break
 
 
 def detect(frame):
