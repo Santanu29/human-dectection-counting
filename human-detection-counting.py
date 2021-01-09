@@ -4,21 +4,11 @@ import numpy as np
 import tkinter as tk
 from tkinter import filedialog
 
+# Trained model for human detection
 HOGCV = cv2.HOGDescriptor()
 HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
-# cv2.startWindowThread()
-
-
-# cap = cv2.VideoCapture(0)
-
-# while True:
-#     ret, frame = cap.read()
-#     cv2.imshow("Frame", frame)
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         break
-
-
+# Detect human in a frame and make a rectangular box around them
 def detect(frame):
     bounding_box_cordinates, weights = HOGCV.detectMultiScale(frame, winStride=(4, 4), padding=(8, 8), scale=1.03)
 
@@ -32,8 +22,7 @@ def detect(frame):
     cv2.putText(frame, f'Total Persons : {person - 1}', (20, 50), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 0, 0), 2)
     cv2.imshow('Output', frame)
 
-    # return frame
-
+# Detect human in an image
 def detectInImage():
     path = filedialog.askopenfilename(initialdir="/", title="Select File",
                                       filetypes=(('JPG (*.jpg;*.jpeg)',('*.jpg','*.jpeg')),
@@ -42,11 +31,11 @@ def detectInImage():
     img = cv2.imread(path)
     img = imutils.resize(img, width=min(800, img.shape[1]))
     detect(img)
-    # cv2.imshow('Detected Image', detected)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+# Detect human in a video    
 def detectInVideo():
     path = filedialog.askopenfilename(initialdir="/", title="Select File",
                                       filetypes=(('MP4 Video File (*mp4)','*.mp4'),
@@ -65,6 +54,7 @@ def detectInVideo():
     video.release()
     cv2.destroyAllWindows()
 
+# Detect human in a live video through webcam    
 def detectInCamera():
     live = cv2.VideoCapture(0)
 
@@ -78,6 +68,7 @@ def detectInCamera():
     live.release()
     cv2.destroyAllWindows()
 
+# GUI design for input selection    
 def gui():
     root = tk.Tk()
     root.title('Human Regoniser & Tracker')
@@ -95,20 +86,17 @@ def gui():
     text.place(relwidth=0.9, relheight=0.3, relx=0.05, rely=0.1)
 
     imageButton = tk.Button(frame, text="Image", fg='black', bg='#C5C0C0', font=('', 20), command=detectInImage)
-    # imageButton.pack()
     imageButton.place(relwidth=0.7, relheight=0.13, relx=0.15, rely=0.5)
 
     videoButton = tk.Button(frame, text="Video", fg='black', bg='#C5C0C0', font=('', 20), command=detectInVideo)
-    # videoButton.pack()
     videoButton.place(relwidth=0.7, relheight=0.13, relx=0.15, rely=0.65)
 
     cameraButton = tk.Button(frame, text="Camera", fg='black', bg='#C5C0C0', font=('', 20), command=detectInCamera)
-    # videoButton.pack()
     cameraButton.place(relwidth=0.7, relheight=0.13, relx=0.15, rely=0.8)
 
     root.mainloop()
 
-
+# Start of program
 if __name__=="__main__":
     gui()
 
