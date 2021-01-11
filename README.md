@@ -12,5 +12,4 @@ The program makes use of the libraries OpenCV, NumPy, Imutils and Tkinter.
   
   This program makes use of Histogram of Oriented Gradient Descriptor. It is a feature descriptor for the use object detection. OpenCV has efficiently implemented HOG Descriptor algorithm with Support Vector Machine or SVM. HOGDescriptor_getDefaultPeopleDetector() is a pre-trained model for human detection of OpenCV and then the support vector machine is fed into it.
 
-
-
+The detect() function detects the humans in the frame and displays the frame with the people highlighted. 
