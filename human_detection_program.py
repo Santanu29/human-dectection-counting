@@ -64,7 +64,6 @@ def detectInCamera():
 
     while True:
         isTrue, frame = live.read()
-        cv2.imshow('Camera', frame)
         detect(frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
