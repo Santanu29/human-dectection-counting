@@ -12,7 +12,7 @@ hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 # Detect human in a frame and make a rectangular box around them
 def detect(frame):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    bounding_box_coordinates, weights = hog.detectMultiScale(gray, winStride=(8, 8), padding=(8, 8), scale=1.03)
+    bounding_box_coordinates, weights = hog.detectMultiScale(gray, winStride=(9, 9), padding=(2, 2), scale=1.03)
 
     person = 1
     for x, y, w, h in bounding_box_coordinates:
@@ -76,7 +76,7 @@ def detectInCamera():
 # GUI design for input selection    
 def gui():
     root = tk.Tk()
-    root.title('Human Regoniser & Tracker')
+    root.title('Human Recogniser & Tracker')
     root.iconbitmap(r'icon.ico')
 
     canvas = tk.Canvas(root, height=500, width=670, bg='#94A2FF')
